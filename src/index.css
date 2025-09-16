@@ -2,41 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* StreakLink Dark Theme Design System - Neon Futuristic */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Dark theme with neon accents */
+    --background: 0 0% 5%; /* Deep charcoal #0D0D0D */
+    --foreground: 0 0% 96%; /* Bright white #F5F5F5 */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 8%; /* Slightly lighter than background */
+    --card-foreground: 0 0% 96%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 96%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Neon Purple Primary */
+    --primary: 267 91% 65%; /* Electric Purple #A855F7 */
+    --primary-foreground: 0 0% 96%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Dark secondary */
+    --secondary: 0 0% 12%; /* Dark gray */
+    --secondary-foreground: 0 0% 96%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 220 9% 66%; /* Subtle gray #9CA3AF */
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Neon Blue Accent */
+    --accent: 221 83% 60%; /* Neon Blue #3B82F6 */
+    --accent-foreground: 0 0% 96%;
+
+    /* Teal highlight */
+    --highlight: 172 81% 40%; /* Bright Teal #14B8A6 */
+    --highlight-foreground: 0 0% 96%;
+
+    /* Orange CTA */
+    --cta: 25 95% 53%; /* Vibrant Orange #F97316 */
+    --cta-foreground: 0 0% 96%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 96%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 0 0% 15%; /* Subtle dark border */
+    --input: 0 0% 12%;
+    --ring: 267 91% 65%; /* Purple ring */
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Custom gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(267 91% 65%), hsl(221 83% 60%));
+    --gradient-secondary: linear-gradient(135deg, hsl(172 81% 40%), hsl(195 100% 50%));
+    --gradient-hero: linear-gradient(135deg, hsl(267 91% 65% / 0.1), hsl(221 83% 60% / 0.05));
+    
+    /* Glow effects */
+    --glow-primary: 0 0 30px hsl(267 91% 65% / 0.5);
+    --glow-accent: 0 0 30px hsl(221 83% 60% / 0.5);
+    --glow-highlight: 0 0 20px hsl(172 81% 40% / 0.4);
+    --glow-cta: 0 0 25px hsl(25 95% 53% / 0.6);
+
+    /* Smooth transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-glow: box-shadow 0.3s ease, transform 0.3s ease;
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +126,94 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  /* Glow effect utilities */
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+  
+  .glow-accent {
+    box-shadow: var(--glow-accent);
+  }
+  
+  .glow-highlight {
+    box-shadow: var(--glow-highlight);
+  }
+  
+  .glow-cta {
+    box-shadow: var(--glow-cta);
+  }
+
+  /* Gradient backgrounds */
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-secondary {
+    background: var(--gradient-secondary);
+  }
+  
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  /* Hover glow animations */
+  .hover-glow-primary {
+    transition: var(--transition-glow);
+  }
+  .hover-glow-primary:hover {
+    box-shadow: var(--glow-primary);
+    transform: translateY(-2px);
+  }
+
+  .hover-glow-accent {
+    transition: var(--transition-glow);
+  }
+  .hover-glow-accent:hover {
+    box-shadow: var(--glow-accent);
+    transform: translateY(-2px);
+  }
+
+  .hover-glow-cta {
+    transition: var(--transition-glow);
+  }
+  .hover-glow-cta:hover {
+    box-shadow: var(--glow-cta);
+    transform: translateY(-2px);
+  }
+
+  /* Neon border effect */
+  .neon-border {
+    border: 1px solid transparent;
+    background: linear-gradient(hsl(var(--card)), hsl(var(--card))) padding-box,
+                var(--gradient-primary) border-box;
+  }
+
+  /* Pulse animation for trend indicators */
+  .pulse-glow {
+    animation: pulse-glow 2s infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.4);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(var(--primary) / 0.8);
+    }
+  }
+
+  /* Countdown timer styling */
+  .countdown-digit {
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    font-size: 2rem;
   }
 }
